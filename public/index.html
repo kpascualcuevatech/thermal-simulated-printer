@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Página de Impresión con Nest</title>
+  <style>
+    .print-area {
+      width: 200px;
+      height: 200px;
+      border: 2px solid black;
+      background-color: white;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Prueba de Impresión con NestJS</h1>
+  
+  <div class="print-area"></div>
+  
+  <button id="printBtn">Imprimir</button>
+
+  <script>
+    document.getElementById('printBtn').addEventListener('click', async () => {
+      try {
+        const response = await fetch('/print', { method: 'POST' });
+        if (response.ok) {
+          alert('¡Solicitud de impresión enviada!');
+        } else {
+          const errorMsg = await response.text();
+          alert('Error de impresión: ' + errorMsg);
+        }
+      } catch (error) {
+        alert('Error al enviar solicitud de impresión: ' + error);
+      }
+    });
+  </script>
+</body>
+</html>
